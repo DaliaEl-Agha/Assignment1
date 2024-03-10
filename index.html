@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Map</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.24/"></script>
+</head>
+<body>
+    <div id="viewDiv" style="height: 100vh; width: 100%;"></div>
+    <script>
+        require([
+            "esri/views/MapView",
+            "esri/WebMap",
+            "esri/widgets/Sketch",
+            "esri/widgets/Home",
+            "dojo/domReady!"
+        ], function(MapView, WebMap, Sketch, Home) {
+
+            const webmap = new WebMap({
+                portalItem: {
+                    id: "32cbbbefed6747c2abd25d7dda2e36e5"
+                }
+            });
+
+            const view = new MapView({
+                container: "viewDiv",
+                map: webmap
+            });
+
+            const sketch = new Sketch({
+                view: view
+            });
+            view.ui.add(sketch, "top-right");
+
+            const homeWidget = new Home({
+                view: view
+            });
+            view.ui.add(homeWidget, "top-left");
+
+        });
+    </script>
+</body>
+</html>
